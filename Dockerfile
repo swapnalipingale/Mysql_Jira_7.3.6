@@ -32,9 +32,6 @@ EXPOSE 8080
 ENV MYSQL_USER root 
 ENV MYSQL_PASS root
 
-RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
-RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
-
 RUN apt-get install -y mysql-server
 
 RUN rm -rf /var/lib/mysql/*
