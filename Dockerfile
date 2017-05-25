@@ -29,8 +29,6 @@ RUN chmod +x /docker-entrypoint.sh
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
 EXPOSE 8080
 
-CMD ["/sbin/my_init"]
-
 ENV MYSQL_USER root 
 ENV MYSQL_PASS root
 
