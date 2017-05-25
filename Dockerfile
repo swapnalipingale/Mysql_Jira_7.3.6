@@ -39,8 +39,6 @@ RUN rm -rf /var/lib/mysql/*
 ADD build/my.cnf /etc/mysql/my.cnf
 ADD build/dbconfig.xml /var/atlassian/application-data/jira
 
-ADD build/setup /root/setup
-
 ADD my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 
