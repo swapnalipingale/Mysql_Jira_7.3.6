@@ -19,18 +19,14 @@ RUN set -x \
     && echo -e                 "\njira.home=$JIRA_HOME" >> "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties" \
     && touch -d "@0"           "${JIRA_INSTALL}/conf/server.xml"
     
-RUN mkdir /etc/service/jira
-ADD runit/jira.sh /etc/service/jira/run
-RUN chmod +x /etc/service/jira/run
-
-EXPOSE 8080
-
 VOLUME ["/var/atlassian/application-data/jira", "/opt/atlassian/jira/logs"]
-
 WORKDIR /opt/atlassian/jira
 
 COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
+EXPOSE 8080
 
 CMD ["/sbin/my_init"]
 
@@ -46,10 +42,6 @@ RUN rm -rf /var/lib/mysql/*
 
 ADD build/my.cnf /etc/mysql/my.cnf
 
-RUN mkdir /etc/service/mysql
-ADD runit/mysql.sh /etc/service/mysql/run
-RUN chmod +x /etc/service/mysql/run
-
 ADD build/setup /root/setup
 
 ADD my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
@@ -58,5 +50,3 @@ RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 EXPOSE 3306
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-CMD ["/opt/atlassian/jira/bin/catalina.sh", "run"]
