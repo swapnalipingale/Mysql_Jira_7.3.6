@@ -32,12 +32,10 @@ EXPOSE 8080
 ENV MYSQL_USER root 
 ENV MYSQL_PASS root
 
-RUN apt-get install mysql-server
-
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 
-RUN rm -rf /var/lib/mysql/*
+RUN apt-get install mysql-server
 
 ADD build/my.cnf /etc/mysql/my.cnf
 ADD build/dbconfig.xml /var/atlassian/application-data/jira
