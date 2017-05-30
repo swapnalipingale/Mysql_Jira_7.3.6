@@ -26,8 +26,13 @@ COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
 RUN chmod +x /docker-entrypoint.sh
 
-CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
+RUN mkdir /etc/service/jira
+ADD runit/jira.sh /etc/service/jira/run
+RUN chmod +x /etc/service/jira/run
+
 EXPOSE 8080
+
+CMD ["/sbin/my_init"]
 
 ENV MYSQL_USER root 
 ENV MYSQL_PASS root
@@ -41,6 +46,12 @@ RUN rm -rf /var/lib/mysql/*
 
 ADD build/my.cnf /etc/mysql/my.cnf
 ADD build/dbconfig.xml /var/atlassian/application-data/jira
+
+RUN mkdir /etc/service/mysql
+ADD runit/mysql.sh /etc/service/mysql/run
+RUN chmod +x /etc/service/mysql/run
+
+ADD build/setup /root/setup
 
 ADD my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
