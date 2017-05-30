@@ -49,7 +49,7 @@ RUN mkdir /etc/mysql/run
 ADD runit/mysql.sh /etc/mysql/run
 RUN chmod +x /etc/mysql/run
 
-ADD build/setup /root/setup
+ADD build/Setup /root/Setup
 
 ADD my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
