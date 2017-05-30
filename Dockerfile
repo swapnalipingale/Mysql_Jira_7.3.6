@@ -32,7 +32,7 @@ EXPOSE 8080
 ENV MYSQL_USER root 
 ENV MYSQL_PASS root
 
-RUN apt-get install -y mysql-server
+RUN apt-get install mysql-server
 
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
