@@ -35,7 +35,9 @@ ENV MYSQL_PASS root
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 
-RUN apt-get install mysql-server
+RUN apt-get install -y mysql-server
+
+RUN rm -rf /var/lib/mysql/*
 
 ADD build/my.cnf /etc/mysql/my.cnf
 ADD build/dbconfig.xml /var/atlassian/application-data/jira
