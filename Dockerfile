@@ -26,11 +26,9 @@ COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
 RUN chmod +x /docker-entrypoint.sh
 
-CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
-
 EXPOSE 8080
 
-CMD ["/sbin/my_init"]
+#CMD ["/sbin/my_init"]
 
 ENV MYSQL_USER root 
 ENV MYSQL_PASS root
@@ -57,3 +55,4 @@ RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 EXPOSE 3306
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
