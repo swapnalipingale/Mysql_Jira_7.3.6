@@ -27,7 +27,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
 
     echo '*** Bootstrapping database with scripts found in /root/setup'
     if [ -d /root/setup ]; then
-        for sql in $(ls /root/Setup/*.sql 2>/dev/null | sort); do
+        for sql in $(ls /root/setup/*.sql 2>/dev/null | sort); do
             echo '*** Running script:' $sql
             mysql -uroot -proot -e "\. $sql"
         done
