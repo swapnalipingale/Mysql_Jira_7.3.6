@@ -51,6 +51,8 @@ ADD build/Setup /root/Setup
 
 ADD my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
+ADD my_init.d/Jiradb.sql /etc/Jiradb.sql
+RUN chmod +x /etc/Jiradb.sql
 
 EXPOSE 3306
 
