@@ -57,4 +57,5 @@ RUN chmod +x /etc/Jiradb.sql
 EXPOSE 3306
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+CMD ["/usr/bin/mysqld_safe"]
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
