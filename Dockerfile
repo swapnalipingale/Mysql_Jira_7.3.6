@@ -30,8 +30,8 @@ EXPOSE 8080
 
 #CMD ["/sbin/my_init"]
 
-ENV MYSQL_USER root 
-ENV MYSQL_PASS root
+ENV MYSQL_USER swapnalip
+ENV MYSQL_PASS test123
 
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
