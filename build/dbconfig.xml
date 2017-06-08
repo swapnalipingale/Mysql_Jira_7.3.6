@@ -7,8 +7,8 @@
   <jdbc-datasource>
     <url>jdbc:mysql://127.0.0.1:3306/Jiradb?useUnicode=true&amp;characterEncoding=UTF8&amp;sessionVariables=default_storage_engine=InnoDB</url>
     <driver-class>com.mysql.jdbc.Driver</driver-class>
-    <username>swapnalip</username>
-    <password>test123</password>
+    <username>root</username>
+    <password>root</password>
     <pool-min-size>20</pool-min-size>
     <pool-max-size>20</pool-max-size>
     <pool-max-wait>30000</pool-max-wait>
