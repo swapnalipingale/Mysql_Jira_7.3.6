@@ -6,24 +6,24 @@ if [ ! -d /var/lib/mysql/mysql ]; then
         
     chown -R mysql.mysql /var/lib/mysql
     mysql_install_db > /dev/null
-  
-    #rm -rf /var/run/mysqld/*
+
+    rm -rf /var/run/mysqld/*
 
     echo '*** Starting mysqld'
     # The sleep 1 is there to make sure that inotifywait starts up before the socket is created
     mysqld_safe &
-    chown -R mysql /var/run/mysqld/
+
     echo '*** Waiting for mysqld to come online'
     while [ ! -x /var/run/mysqld/mysqld.sock ]; do
         sleep 1
     done
-        
+    
     echo '*** Setting root password to root'
     /usr/bin/mysqladmin -u root password 'root'
 
     echo "*** Creating mysql user: $MYSQL_USER with pass: $MYSQL_PASS"
-    mysql -uroot -proot -e "CREATE USER '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASS}';"
-    mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+    mysql -uroot -proot -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASS}';"
+    mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
 
     echo '*** Bootstrapping database with scripts found in /root/setup'
     if [ -d /root/setup ]; then
