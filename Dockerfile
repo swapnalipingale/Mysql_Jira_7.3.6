@@ -29,7 +29,7 @@ RUN chmod +x /docker-entrypoint.sh
 
 EXPOSE 8080
 
-#CMD ["/sbin/my_init"]
+CMD ["/sbin/my_init"]
 
 ENV MYSQL_USER root
 ENV MYSQL_PASS root
