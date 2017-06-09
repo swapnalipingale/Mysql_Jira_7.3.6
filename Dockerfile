@@ -105,5 +105,5 @@ ENTRYPOINT ["docker-entrypoint1.sh"]
 EXPOSE 3306
 CMD ["mysqld"]
 ########################################### Finished Mysql Installation ######################################################################
-
+ADD build/dbconfig.xml /var/atlassian/application-data/jira
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
