@@ -106,4 +106,7 @@ EXPOSE 3306
 CMD ["mysqld"]
 ########################################### Finished Mysql Installation ######################################################################
 ADD build/dbconfig.xml /var/atlassian/application-data/jira
+ADD my_init.d/Jiradb.sql /etc/Jiradb.sql
+RUN chmod +x /etc/Jiradb.sql
+
 CMD ["/opt/atlassian/jira/bin/start-jira.sh", "run"]
